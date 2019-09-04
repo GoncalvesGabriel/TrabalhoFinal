@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
 
 class SplashActivity : AppCompatActivity() {
 
-    private val TIME_WAIT_SPLASHSCREEN = 3500L
+    private val TIME_WAIT_SPLASHSCREEN = 10000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
