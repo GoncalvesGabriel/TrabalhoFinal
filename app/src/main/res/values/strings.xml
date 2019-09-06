@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">TrabalhoFinal</string>
     <string name="title_activity_principal">ActivityPrincipal</string>
+    <string name="desc_tela_login">Logo tela de login</string>
+    <string name="label_e_mail">E-mail</string>
+    <string name="label_senha">Senha</string>
+    <string name="label_entrar">Entrar</string>
+    <string name="label_create_account">Criar nova conta</string>
 </resources>
