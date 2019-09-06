@@ -7,7 +7,7 @@ import br.com.fiap.trabalhofinal.R
 
 import kotlinx.android.synthetic.main.activity_principal.*
 
-class ActivityPrincipal : AppCompatActivity() {
+class PrincipalActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
