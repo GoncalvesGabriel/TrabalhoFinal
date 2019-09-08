@@ -9,7 +9,6 @@ import br.com.fiap.trabalhofinal.R
 import br.com.fiap.trabalhofinal.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.koin.android.ext.android.inject
 

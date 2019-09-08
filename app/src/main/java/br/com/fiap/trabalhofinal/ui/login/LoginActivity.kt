@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
 
-class LoginActivity() : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private val newUserRequestCode = 1
 

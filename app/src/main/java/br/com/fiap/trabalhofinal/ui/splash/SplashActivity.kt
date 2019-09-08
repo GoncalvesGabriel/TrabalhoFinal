@@ -10,9 +10,7 @@ import android.view.animation.AnimationUtils
 import br.com.fiap.trabalhofinal.R
 import br.com.fiap.trabalhofinal.principal.PrincipalActivity
 import br.com.fiap.trabalhofinal.ui.login.LoginActivity
-import br.com.fiap.trabalhofinal.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
-import java.security.Principal
 
 class SplashActivity : AppCompatActivity() {
 
