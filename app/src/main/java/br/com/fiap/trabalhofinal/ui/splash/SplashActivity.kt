@@ -1,12 +1,15 @@
 package br.com.fiap.trabalhofinal.ui.splash
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.animation.AnimationUtils
 import br.com.fiap.trabalhofinal.R
 import br.com.fiap.trabalhofinal.principal.PrincipalActivity
+import br.com.fiap.trabalhofinal.ui.login.LoginActivity
 import br.com.fiap.trabalhofinal.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 import java.security.Principal
@@ -18,7 +21,20 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        animar()
+        val preferences = getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
+        val firstOpen = preferences.getBoolean("first_open", true)
+        if (firstOpen) {
+            animar()
+            markAsAlreadyOpen(preferences)
+        } else {
+            goToLogin()
+        }
+    }
+
+    private fun goToLogin() {
+        val nextActivity = Intent(this@SplashActivity, LoginActivity::class.java)
+        startActivity(nextActivity)
+        finish()
     }
 
     private fun animar() {
@@ -32,4 +48,11 @@ class SplashActivity : AppCompatActivity() {
             finish()
         }, TIME_WAIT_SPLASHSCREEN)
     }
+
+    private fun markAsAlreadyOpen(preferences: SharedPreferences?) {
+        val editor = preferences!!.edit()
+        editor.putBoolean("first_open", false)
+        editor.apply()
+    }
+
 }
