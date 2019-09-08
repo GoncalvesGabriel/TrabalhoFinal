@@ -1,7 +1,7 @@
 package br.com.fiap.trabalhofinal
 
 import android.app.Application
-import br.com.fiap.trabalhofinal.di.securityModule
+import br.com.fiap.trabalhofinal.di.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -15,7 +15,12 @@ class MyApplication : Application() {
             // declare modules
             modules(
                 listOf(
-                    securityModule
+                    securityModule,
+                    connectionModule,
+                    servicesModule,
+                    repositoryModule,
+                    uiModule,
+                    viewModelModule
                 )
             )
         }

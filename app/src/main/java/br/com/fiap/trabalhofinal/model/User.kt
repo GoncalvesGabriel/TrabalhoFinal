@@ -1,6 +1,8 @@
 package br.com.fiap.trabalhofinal.model
 
+import com.google.gson.annotations.SerializedName
+
 class User(
-    val nome: String = "",
-    val email: String = ""
+    @SerializedName("name") val nome: String = "",
+    @SerializedName("email") val email: String = ""
 )

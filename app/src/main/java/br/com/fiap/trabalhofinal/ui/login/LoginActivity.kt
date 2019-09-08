@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import br.com.fiap.trabalhofinal.R
-import br.com.fiap.trabalhofinal.principal.PrincipalActivity
+import br.com.fiap.trabalhofinal.main.MainActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToPrincipal() {
-        val intent = Intent(this, PrincipalActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
         finish()

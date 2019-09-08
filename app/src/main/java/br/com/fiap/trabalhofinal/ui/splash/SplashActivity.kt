@@ -8,7 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.animation.AnimationUtils
 import br.com.fiap.trabalhofinal.R
-import br.com.fiap.trabalhofinal.principal.PrincipalActivity
+import br.com.fiap.trabalhofinal.main.MainActivity
 import br.com.fiap.trabalhofinal.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 
@@ -41,7 +41,7 @@ class SplashActivity : AppCompatActivity() {
         ivSplash.clearAnimation()
         ivSplash.startAnimation(anim)
         Handler().postDelayed({
-            val nextActivity = Intent(this@SplashActivity, PrincipalActivity::class.java)
+            val nextActivity = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(nextActivity)
             finish()
         }, TIME_WAIT_SPLASHSCREEN)
