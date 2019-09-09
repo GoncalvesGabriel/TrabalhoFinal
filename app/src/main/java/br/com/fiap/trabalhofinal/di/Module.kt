@@ -1,6 +1,5 @@
 package br.com.fiap.trabalhofinal.di
 
-import br.com.fiap.trabalhofinal.R
 import br.com.fiap.trabalhofinal.adapter.ProductListAdapter
 import br.com.fiap.trabalhofinal.model.view.ProductViewModel
 import br.com.fiap.trabalhofinal.repository.ProductRepository
@@ -8,14 +7,11 @@ import br.com.fiap.trabalhofinal.repository.ProductRepositoryImpl
 import br.com.fiap.trabalhofinal.services.ProdutoService
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.firebase.auth.FirebaseAuth
-import com.pivincii.livedata_retrofit.network.LiveDataCallAdapter
-import com.pivincii.livedata_retrofit.network.LiveDataCallAdapterFactory
 import okhttp3.OkHttpClient
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.math.sin
 
 
 val securityModule = module {
@@ -29,7 +25,6 @@ val connectionModule = module {
             Retrofit.Builder()
                 .baseUrl("https://trabalho-final-mobile.herokuapp.com")
                 .addConverterFactory(GsonConverterFactory.create())
-//                .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .client(
                     OkHttpClient.Builder()
                         .addNetworkInterceptor(StethoInterceptor())
