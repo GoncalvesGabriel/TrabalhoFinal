@@ -8,6 +8,8 @@ import br.com.fiap.trabalhofinal.repository.ProductRepositoryImpl
 import br.com.fiap.trabalhofinal.services.ProdutoService
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.firebase.auth.FirebaseAuth
+import com.pivincii.livedata_retrofit.network.LiveDataCallAdapter
+import com.pivincii.livedata_retrofit.network.LiveDataCallAdapterFactory
 import okhttp3.OkHttpClient
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -25,24 +27,23 @@ val securityModule = module {
 val connectionModule = module {
     single {
             Retrofit.Builder()
-                .baseUrl(R.string.url_api.toString())
+                .baseUrl("https://trabalho-final-mobile.herokuapp.com")
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .client(
                     OkHttpClient.Builder()
                         .addNetworkInterceptor(StethoInterceptor())
                         .build())
                 .build()
         }
-}
 
-val servicesModule = module {
     single {
         get<Retrofit>().create(ProdutoService::class.java)
     }
 }
 
 val repositoryModule = module {
-    single { ProductRepositoryImpl(get()) }
+    factory<ProductRepository> { ProductRepositoryImpl(get()) }
 }
 
 val uiModule = module {

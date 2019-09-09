@@ -17,7 +17,6 @@ class MyApplication : Application() {
                 listOf(
                     securityModule,
                     connectionModule,
-                    servicesModule,
                     repositoryModule,
                     uiModule,
                     viewModelModule

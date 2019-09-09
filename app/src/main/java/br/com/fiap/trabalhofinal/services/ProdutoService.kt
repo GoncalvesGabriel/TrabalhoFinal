@@ -7,16 +7,16 @@ import retrofit2.http.*
 
 interface ProdutoService {
 
-    @POST("/produto/")
+    @POST("/produtos/")
     fun insert(@Body produto: Produto)
 
-    @GET("/produto/{id}/{data}")
+    @GET("/produtos/{id}/{data}")
     fun findProdutos(@Path("id") id: Long, @Path("data") date: String): Call<Produto>
 
-    @GET("/produto/findAll")
+    @GET("/produtos/findAll")
     fun findAll():LiveData<List<Produto>>
 
-    @DELETE("/produto/")
+    @DELETE("/produtos/")
     fun delete(@Body id: Long);
 }
 
