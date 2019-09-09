@@ -29,7 +29,7 @@ val connectionModule = module {
             Retrofit.Builder()
                 .baseUrl("https://trabalho-final-mobile.herokuapp.com")
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(LiveDataCallAdapterFactory())
+//                .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .client(
                     OkHttpClient.Builder()
                         .addNetworkInterceptor(StethoInterceptor())
