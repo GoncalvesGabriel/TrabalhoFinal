@@ -13,7 +13,7 @@ class ProductViewModel(application: Application, val repository: ProductReposito
 
     val allWords: LiveData<List<Produto>> = repository.findAll();
 
-    fun insert(word: Produto) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(word)
+    fun insert(produto: Produto) = viewModelScope.launch(Dispatchers.IO) {
+        repository.insert(produto)
     }
 }

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 class Produto (
 
-    @SerializedName("id")val id: Long,
+    @SerializedName("id")val id: Long?,
 
     @SerializedName("codigo")val codigo: String = "",
 

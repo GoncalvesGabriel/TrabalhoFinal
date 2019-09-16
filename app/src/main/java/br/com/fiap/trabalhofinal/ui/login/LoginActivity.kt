@@ -46,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         inputLoginEmail.setOnFocusChangeListener(View.OnFocusChangeListener { view, hasFocus ->
+            // to be implemented
         })
     }
 
