@@ -24,13 +24,13 @@ class CadastroActivity : AppCompatActivity() {
         btCadastrar.setOnClickListener {
             val produto = Produto(
                 codigo = inputCodigo.text.toString(),
-                nome = inputNome.toString(),
+                nome = inputNome.text.toString(),
                 qtdeEstoque = inputQtdeEstoque.text.toString().toDouble(),
                 valor = inputValor.text.toString().toDouble(),
                 id = null
             )
-            productViewModel.insert(produto).invokeOnCompletion {
-                Toast.makeText(this, "Produto cadastrado com sucesso", Toast.LENGTH_SHORT).show()
+            val insert = productViewModel.insert(produto)
+            insert.invokeOnCompletion {
                 val returnIntent = Intent()
                 setResult(Activity.RESULT_OK, returnIntent)
                 finish()
