@@ -7,17 +7,25 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fiap.trabalhofinal.R
+import br.com.fiap.trabalhofinal.listener.OnClickProdutoItemListener
 import br.com.fiap.trabalhofinal.model.Produto
 
 class ProductListAdapter internal constructor(
-    context: Context
+    context: Context,
+    private val itemClickListener: OnClickProdutoItemListener
 ) : RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var products = emptyList<Produto>()
 
-    inner class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    inner class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productItemView: TextView =  itemView.findViewById(R.id.textView)
+
+        fun bind(produto: Produto, clickListener: OnClickProdutoItemListener) {
+            itemView.setOnClickListener {
+                clickListener.onItemClicked(produto)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -27,7 +35,8 @@ class ProductListAdapter internal constructor(
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val current = products[position]
-        holder.productItemView.text = current.nome;
+        holder.productItemView.text = current.nome
+        holder.bind(current, this.itemClickListener)
     }
 
     internal fun setProduct(products: List<Produto>) {

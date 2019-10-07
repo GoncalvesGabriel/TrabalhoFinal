@@ -41,10 +41,6 @@ val repositoryModule = module {
     factory<ProductRepository> { ProductRepositoryImpl(get()) }
 }
 
-val uiModule = module {
-    factory { ProductListAdapter(get()) }
-}
-
 val viewModelModule = module {
     viewModel {
         ProductViewModel(get(), get())
