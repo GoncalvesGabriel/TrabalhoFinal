@@ -13,7 +13,7 @@ import androidx.lifecycle.MutableLiveData
 class ProductRepositoryImpl(private val service: ProdutoService) : ProductRepository {
 
     override fun findAll(): LiveData<List<Produto>> {
-        var newsData = MutableLiveData<List<Produto>>()
+        val newsData = MutableLiveData<List<Produto>>()
         service.findAll().enqueue(object : Callback<List<Produto>> {
             override fun onFailure(call: Call<List<Produto>>, t: Throwable) {
                 newsData.setValue(null);
@@ -52,7 +52,24 @@ class ProductRepositoryImpl(private val service: ProdutoService) : ProductReposi
     }
 
     @WorkerThread
-    override suspend fun insert(produto: Produto) {
+    override suspend fun insert(
+        produto: Produto,
+        onComplete: (Produto?) -> Unit,
+        onError: (Throwable?) -> Unit
+    ) {
         service.insert(produto)
+            .enqueue(object : Callback<Produto> {
+                override fun onResponse(call: Call<Produto>, response: Response<Produto>) {
+                    if (response.isSuccessful) {
+                        onComplete(response.body())
+                    } else {
+                        onError(Throwable("Não foi possivel inserir o produto"))
+                    }
+                }
+
+                override fun onFailure(call: Call<Produto>, t: Throwable) {
+                    onError(Throwable("Não foi possivel inserir o produto"))
+                }
+            })
     }
 }

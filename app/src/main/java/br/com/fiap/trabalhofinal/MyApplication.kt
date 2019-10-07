@@ -18,7 +18,6 @@ class MyApplication : Application() {
                     securityModule,
                     connectionModule,
                     repositoryModule,
-                    uiModule,
                     viewModelModule
                 )
             )

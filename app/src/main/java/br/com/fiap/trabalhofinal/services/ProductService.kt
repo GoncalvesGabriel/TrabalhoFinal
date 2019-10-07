@@ -6,8 +6,8 @@ import retrofit2.http.*
 
 interface ProdutoService {
 
-    @POST("/produtos/")
-    fun insert(@Body produto: Produto)
+    @POST("/produtos")
+    fun insert(@Body produto: Produto): Call<Produto>
 
     @GET("/produtos/{id}/{data}")
     fun findProdutos(@Path("id") id: Long, @Path("data") date: String): Call<Produto>
