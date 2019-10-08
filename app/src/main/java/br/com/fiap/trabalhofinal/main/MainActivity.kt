@@ -15,7 +15,6 @@ import br.com.fiap.trabalhofinal.model.view.ProductViewModel
 import br.com.fiap.trabalhofinal.ui.cadastro.CadastroActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), OnClickProdutoItemListener {
@@ -31,7 +30,6 @@ class MainActivity : AppCompatActivity(), OnClickProdutoItemListener {
         this.adapter = ProductListAdapter(this@MainActivity, this)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -49,6 +47,13 @@ class MainActivity : AppCompatActivity(), OnClickProdutoItemListener {
         Toast.makeText(this@MainActivity, "Produto clicado: " + produto.nome, Toast.LENGTH_SHORT).show()
     }
 
+    override fun onDeleteClicked(produto: Produto) {
+        productViewModel.delete(produto)
+    }
+
+    override fun onEditClicked(produto: Produto) {
+        TODO("OI GABES, POE O REDIRECT PRO CADASTRO AQUI")
+    }
 }
 
 

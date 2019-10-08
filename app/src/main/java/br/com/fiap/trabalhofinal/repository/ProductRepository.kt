@@ -18,4 +18,10 @@ interface ProductRepository {
         onComplete: (Produto?) -> Unit,
         onError: (Throwable?) -> Unit
     )
+
+    fun delete(
+        produto: Produto,
+        onComplete: (String?) -> Unit,
+        onError: (Throwable?) -> Unit
+    )
 }

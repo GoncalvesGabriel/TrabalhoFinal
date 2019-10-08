@@ -30,4 +30,19 @@ class ProductViewModel(application: Application, val repository: ProductReposito
             }
         )
     }
+
+    fun delete(produto: Produto) = viewModelScope.launch(Dispatchers.IO) {
+        repository.delete(
+            produto,
+            onComplete = {
+                isLoading.value = false
+                messageResponse.value = "Dado excluído com sucesso"
+            },
+            onError = {
+                isLoading.value = false
+                messageResponse.value = it?.message
+            }
+        )
+    }
+
 }
