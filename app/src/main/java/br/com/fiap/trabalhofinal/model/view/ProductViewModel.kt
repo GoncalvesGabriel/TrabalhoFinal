@@ -15,9 +15,9 @@ class ProductViewModel(application: Application, val repository: ProductReposito
     val isLoading = MutableLiveData<Boolean>()
     val messageResponse = MutableLiveData<String>()
 
-    val allWords: LiveData<List<Produto>> = repository.findAll();
+    val allProduct: LiveData<List<Produto>> = repository.findAll();
 
-    fun insert(produto: Produto) = viewModelScope.launch(Dispatchers.IO) {
+    fun insert(produto: Produto?) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(
             produto,
             onComplete = {

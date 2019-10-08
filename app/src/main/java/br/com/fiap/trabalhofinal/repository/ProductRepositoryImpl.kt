@@ -12,8 +12,11 @@ import androidx.lifecycle.MutableLiveData
 
 class ProductRepositoryImpl(private val service: ProdutoService) : ProductRepository {
 
+    var produtos: MutableList<Produto> = ArrayList();
+
+    val newsData = MutableLiveData<List<Produto>>()
+
     override fun findAll(): LiveData<List<Produto>> {
-        val newsData = MutableLiveData<List<Produto>>()
         service.findAll().enqueue(object : Callback<List<Produto>> {
             override fun onFailure(call: Call<List<Produto>>, t: Throwable) {
                 newsData.setValue(null);
@@ -21,7 +24,9 @@ class ProductRepositoryImpl(private val service: ProdutoService) : ProductReposi
 
             override fun onResponse(call: Call<List<Produto>>, response: Response<List<Produto>>) {
                 if (response.isSuccessful()) {
-                    newsData.setValue(response.body());
+                    val elements = response.body().orEmpty()
+                    produtos.addAll(elements)
+                    newsData.value =  produtos
                 }
             }
         });
@@ -53,7 +58,7 @@ class ProductRepositoryImpl(private val service: ProdutoService) : ProductReposi
 
     @WorkerThread
     override suspend fun insert(
-        produto: Produto,
+        produto: Produto?,
         onComplete: (Produto?) -> Unit,
         onError: (Throwable?) -> Unit
     ) {
@@ -61,6 +66,11 @@ class ProductRepositoryImpl(private val service: ProdutoService) : ProductReposi
             .enqueue(object : Callback<Produto> {
                 override fun onResponse(call: Call<Produto>, response: Response<Produto>) {
                     if (response.isSuccessful) {
+                        val produto = response.body()
+                        if (produto != null) {
+                            produtos.add(produto)
+                            newsData.value =  produtos
+                        }
                         onComplete(response.body())
                     } else {
                         onError(Throwable("Não foi possivel inserir o produto"))

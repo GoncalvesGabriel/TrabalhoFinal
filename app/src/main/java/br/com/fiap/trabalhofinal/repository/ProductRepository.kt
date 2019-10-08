@@ -14,7 +14,7 @@ interface ProductRepository {
         onError: (Throwable?) -> Unit)
 
     suspend fun insert(
-        produto: Produto,
+        produto: Produto?,
         onComplete: (Produto?) -> Unit,
         onError: (Throwable?) -> Unit
     )

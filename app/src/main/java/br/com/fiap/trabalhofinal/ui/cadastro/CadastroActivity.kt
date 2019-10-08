@@ -17,18 +17,32 @@ class CadastroActivity : AppCompatActivity() {
 
     val productViewModel: ProductViewModel by viewModel()
 
+    var produto: Produto? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro)
 
+        if (this.intent.hasExtra("PRODUTO")) {
+            produto = this.intent.getParcelableExtra<Produto?>("PRODUTO")
+        }
+
+        if (produto != null) {
+            inputCodigo.setText(produto?.codigo)
+            inputNome.setText(produto?.nome)
+            inputQtdeEstoque.setText(produto?.qtdeEstoque.toString())
+            inputValor.setText(produto?.valor.toString())
+        }
+
         btCadastrar.setOnClickListener {
-            val produto = Produto(
-                codigo = inputCodigo.text.toString(),
-                nome = inputNome.text.toString(),
-                qtdeEstoque = inputQtdeEstoque.text.toString().toDouble(),
-                valor = inputValor.text.toString().toDouble(),
-                id = null
+            produto = Produto(
+                produto?.id,
+                inputCodigo.text.toString(),
+                inputNome.text.toString(),
+                inputQtdeEstoque.text.toString().toDouble(),
+                inputValor.text.toString().toDouble()
             )
+
             val insert = productViewModel.insert(produto)
             insert.invokeOnCompletion {
                 val returnIntent = Intent()
