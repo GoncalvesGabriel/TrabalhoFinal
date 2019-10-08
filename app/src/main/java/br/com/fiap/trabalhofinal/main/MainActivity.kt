@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity(), OnClickProdutoItemListener {
         this.adapter = ProductListAdapter(this@MainActivity, this)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -41,17 +40,24 @@ class MainActivity : AppCompatActivity(), OnClickProdutoItemListener {
             words?.let { adapter.setProduct(it) }
         })
         btCadastrar.setOnClickListener {
-            val intent = Intent(this, CadastroActivity::class.java)
-            startActivityForResult(intent, newProdutoRequestCode)
+            startActivityForResult(Intent(this, CadastroActivity::class.java), newProdutoRequestCode)
         }
     }
 
     override fun onItemClicked(produto: Produto) {
+
+    }
+
+    override fun onDeleteClicked(produto: Produto) {
+        productViewModel.delete(produto)
+    }
+
+    override fun onEditClicked(produto: Produto) {
         val intent = Intent(this, CadastroActivity::class.java)
         intent.putExtra("PRODUTO", produto)
         startActivityForResult(intent, editProdutoRequestCode)
     }
-    
+
 }
 
 

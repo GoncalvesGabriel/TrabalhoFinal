@@ -2,12 +2,12 @@ package br.com.fiap.trabalhofinal.repository
 
 import androidx.annotation.WorkerThread
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import br.com.fiap.trabalhofinal.model.Produto
 import br.com.fiap.trabalhofinal.services.ProdutoService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import androidx.lifecycle.MutableLiveData
 
 
 class ProductRepositoryImpl(private val service: ProdutoService) : ProductRepository {
@@ -81,5 +81,30 @@ class ProductRepositoryImpl(private val service: ProdutoService) : ProductReposi
                     onError(Throwable("Não foi possivel inserir o produto"))
                 }
             })
+    }
+
+    @WorkerThread
+    override fun delete(
+        produto: Produto,
+        onComplete: (String?) -> Unit,
+        onError: (Throwable?) -> Unit
+    ) {
+        val id: Long? = produto.id
+        if (id != null) {
+            service.delete(id)
+                .enqueue(object : Callback<Unit> {
+                    override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                        if (response.isSuccessful) {
+                            onComplete("Registro excluído com sucesso")
+                        } else {
+                            onError(Throwable("Não foi possivel inserir o produto"))
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+                        onError(Throwable("Não foi possivel excluir o produto"))
+                    }
+                })
+        }
     }
 }

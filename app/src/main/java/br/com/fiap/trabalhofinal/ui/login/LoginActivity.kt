@@ -12,7 +12,6 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.koin.android.ext.android.inject
 import android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS
 import android.content.Context
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 
 class LoginActivity : AppCompatActivity() {
@@ -44,10 +43,6 @@ class LoginActivity : AppCompatActivity() {
         btSignup.setOnClickListener {
             startActivityForResult(Intent(this, SignUpActivity::class.java), newUserRequestCode)
         }
-
-        inputLoginEmail.setOnFocusChangeListener(View.OnFocusChangeListener { view, hasFocus ->
-            // to be implemented
-        })
     }
 
     private fun goToPrincipal() {

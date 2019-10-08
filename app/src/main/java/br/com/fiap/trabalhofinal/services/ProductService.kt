@@ -15,7 +15,7 @@ interface ProdutoService {
     @GET("/produtos/findAll")
     fun findAll(): Call<List<Produto>>
 
-    @DELETE("/produtos/")
-    fun delete(@Body id: Long);
+    @DELETE("/produtos/{id}")
+    fun delete(@Path("id") id: Long): Call<Unit>
 }
 

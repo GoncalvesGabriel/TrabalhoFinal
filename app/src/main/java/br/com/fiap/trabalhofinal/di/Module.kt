@@ -1,6 +1,5 @@
 package br.com.fiap.trabalhofinal.di
 
-import br.com.fiap.trabalhofinal.adapter.ProductListAdapter
 import br.com.fiap.trabalhofinal.model.view.ProductViewModel
 import br.com.fiap.trabalhofinal.repository.ProductRepository
 import br.com.fiap.trabalhofinal.repository.ProductRepositoryImpl

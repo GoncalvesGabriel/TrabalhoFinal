@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import br.com.fiap.trabalhofinal.R
@@ -20,10 +21,18 @@ class ProductListAdapter internal constructor(
 
     inner class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productItemView: TextView =  itemView.findViewById(R.id.textView)
+        val editButton: ImageButton =  itemView.findViewById(R.id.btEdit)
+        val deleteButton: ImageButton =  itemView.findViewById(R.id.btDelete)
 
         fun bind(produto: Produto, clickListener: OnClickProdutoItemListener) {
             itemView.setOnClickListener {
                 clickListener.onItemClicked(produto)
+            }
+            deleteButton.setOnClickListener {
+                clickListener.onDeleteClicked(produto)
+            }
+            editButton.setOnClickListener {
+                clickListener.onEditClicked(produto)
             }
         }
     }
