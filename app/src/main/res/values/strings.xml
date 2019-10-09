@@ -18,4 +18,9 @@
     <string name="label_quantidade_em_estoque">Quantidade em estoque</string>
     <string name="label_valor">Valor</string>
     <string name="label_cadastrar">Cadastrar</string>
+    <string name="integrante1">Gabriel Gonçaves da Silva</string>
+    <string name="rm_integrante1">333497</string>
+    <string name="integrante2">Tiago Naoto Kamegasawa</string>
+    <string name="rm2">333483</string>
+    <string name="version">Versão</string>
 </resources>

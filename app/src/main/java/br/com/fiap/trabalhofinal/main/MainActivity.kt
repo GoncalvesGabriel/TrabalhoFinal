@@ -35,9 +35,9 @@ class MainActivity : AppCompatActivity(), OnClickProdutoItemListener {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        productViewModel.allProduct.observe(this, Observer { words ->
-            // Update the cached copy of the words in the adapter.
-            words?.let { adapter.setProduct(it) }
+        productViewModel.allProduct.observe(this, Observer { products ->
+            // Update the cached copy of the products in the adapter.
+            products?.let { adapter.setProduct(it) }
         })
         btCadastrar.setOnClickListener {
             startActivityForResult(Intent(this, CadastroActivity::class.java), newProdutoRequestCode)

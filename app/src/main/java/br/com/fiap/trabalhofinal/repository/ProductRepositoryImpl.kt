@@ -70,6 +70,7 @@ class ProductRepositoryImpl(private val service: ProdutoService) : ProductReposi
                         if (produto != null) {
                             produtos.add(produto)
                             newsData.value =  produtos
+                            findAll()
                         }
                         onComplete(response.body())
                     } else {
