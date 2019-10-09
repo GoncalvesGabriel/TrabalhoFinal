@@ -16,46 +16,12 @@ import br.com.fiap.trabalhofinal.ui.cadastro.CadastroActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity(), OnClickProdutoItemListener {
-
-    lateinit var adapter : ProductListAdapter
-
-    val productViewModel: ProductViewModel by viewModel()
-
-    val newProdutoRequestCode = 2
-
-    val editProdutoRequestCode = 1
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        this.adapter = ProductListAdapter(this@MainActivity, this)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        productViewModel.allProduct.observe(this, Observer { products ->
-            // Update the cached copy of the products in the adapter.
-            products?.let { adapter.setProduct(it) }
-        })
-        btCadastrar.setOnClickListener {
-            startActivityForResult(Intent(this, CadastroActivity::class.java), newProdutoRequestCode)
-        }
-    }
-
-    override fun onItemClicked(produto: Produto) {
-
-    }
-
-    override fun onDeleteClicked(produto: Produto) {
-        productViewModel.delete(produto)
-    }
-
-    override fun onEditClicked(produto: Produto) {
-        val intent = Intent(this, CadastroActivity::class.java)
-        intent.putExtra("PRODUTO", produto)
-        startActivityForResult(intent, editProdutoRequestCode)
     }
 
 }
