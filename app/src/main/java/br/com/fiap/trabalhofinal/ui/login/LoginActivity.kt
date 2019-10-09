@@ -13,7 +13,6 @@ import org.koin.android.ext.android.inject
 import android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
-import br.com.fiap.trabalhofinal.ui.about.AboutActivity
 
 class LoginActivity : AppCompatActivity() {
 
@@ -47,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToPrincipal() {
-        val intent = Intent(this, AboutActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
         finish()
