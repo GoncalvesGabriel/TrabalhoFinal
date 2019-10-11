@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun goToPrincipal() {
-        val intent = Intent(this, ProductListActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intent)
         finish()
