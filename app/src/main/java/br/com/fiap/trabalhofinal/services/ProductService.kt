@@ -6,6 +6,9 @@ import retrofit2.http.*
 
 interface ProdutoService {
 
+    @GET("/splash")
+    fun splash(): Call<Unit>
+
     @POST("/produtos")
     fun insert(@Body produto: Produto?): Call<Produto>
 

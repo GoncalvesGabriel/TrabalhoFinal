@@ -1,54 +1,58 @@
 package br.com.fiap.trabalhofinal.ui.cadastro
 
-import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import br.com.fiap.trabalhofinal.R
 import br.com.fiap.trabalhofinal.model.Produto
-import br.com.fiap.trabalhofinal.model.view.ProductViewModel
+import br.com.fiap.trabalhofinal.model.view.FormProductViewModel
+import br.com.fiap.trabalhofinal.ui.list.ProductListActivity
 import kotlinx.android.synthetic.main.activity_cadastro.*
-import kotlinx.android.synthetic.main.activity_cadastro.inputNome
-import kotlinx.android.synthetic.main.activity_sign_up.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class CadastroActivity : AppCompatActivity() {
 
-    val productViewModel: ProductViewModel by viewModel()
+    val formProductViewModel: FormProductViewModel by viewModel()
 
-    var produto: Produto? = null
-
+    lateinit var produto: Produto
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro)
 
+        produto = Produto()
+
         if (this.intent.hasExtra("PRODUTO")) {
-            produto = this.intent.getParcelableExtra<Produto?>("PRODUTO")
+            produto = this.intent.getParcelableExtra("PRODUTO")
+            inputCodigo.setText(produto.codigo)
+            inputNome.setText(produto.nome)
+            inputQtdeEstoque.setText(produto.qtdeEstoque.toString())
+            inputValor.setText(produto.valor.toString())
         }
 
-        if (produto != null) {
-            inputCodigo.setText(produto?.codigo)
-            inputNome.setText(produto?.nome)
-            inputQtdeEstoque.setText(produto?.qtdeEstoque.toString())
-            inputValor.setText(produto?.valor.toString())
-        }
+        formProductViewModel.messageResponse.observe(this, Observer {
+            Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+        })
 
         btCadastrar.setOnClickListener {
             produto = Produto(
-                produto?.id,
+                produto.id,
                 inputCodigo.text.toString(),
                 inputNome.text.toString(),
                 inputQtdeEstoque.text.toString().toDouble(),
                 inputValor.text.toString().toDouble()
             )
 
-            val insert = productViewModel.insert(produto)
-            insert.invokeOnCompletion {
-                val returnIntent = Intent()
-                setResult(Activity.RESULT_OK, returnIntent)
-                finish()
-            }
+            formProductViewModel.insert(produto)
+
+            formProductViewModel.isLoading.observe(this, Observer {
+                if(!it) {
+                    val returnIntent = Intent(this, ProductListActivity::class.java)
+                    startActivity(returnIntent)
+                }
+            })
         }
     }
+
 }
