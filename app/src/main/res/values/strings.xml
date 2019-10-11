@@ -23,4 +23,11 @@
     <string name="integrante2">Tiago Naoto Kamegasawa</string>
     <string name="rm2">333483</string>
     <string name="version">Versão</string>
+    <string name="produtos">Produtos</string>
+    <string name="sobre">Sobre</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="menu">Menu</string>
+    <string name="opcoes">Opções</string>
 </resources>

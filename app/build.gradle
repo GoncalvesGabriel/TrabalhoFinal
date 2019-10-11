@@ -74,7 +74,6 @@ dependencies {
     // ViewModel Kotlin support
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.archLifecycleVersion"
 
-
     // Assertions
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.ext:truth:1.2.0'
@@ -89,5 +88,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso.idling:idling-concurrent:3.2.0'
 
     androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
+
 
 }

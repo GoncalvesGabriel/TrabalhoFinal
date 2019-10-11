@@ -2,6 +2,8 @@ package br.com.fiap.trabalhofinal.ui.list
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +13,7 @@ import br.com.fiap.trabalhofinal.adapter.ProductListAdapter
 import br.com.fiap.trabalhofinal.listener.OnClickProdutoItemListener
 import br.com.fiap.trabalhofinal.model.Produto
 import br.com.fiap.trabalhofinal.model.view.ProductViewModel
+import br.com.fiap.trabalhofinal.ui.about.AboutActivity
 import br.com.fiap.trabalhofinal.ui.cadastro.CadastroActivity
 import kotlinx.android.synthetic.main.activity_product_list.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -30,7 +33,6 @@ class ProductListActivity : AppCompatActivity(), OnClickProdutoItemListener {
             super.onCreate(savedInstanceState)
             this.adapter = ProductListAdapter(this@ProductListActivity, this)
             setContentView(R.layout.activity_product_list)
-            setSupportActionBar(toolbar)
             val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
             recyclerView.adapter = adapter
             recyclerView.layoutManager = LinearLayoutManager(this)
