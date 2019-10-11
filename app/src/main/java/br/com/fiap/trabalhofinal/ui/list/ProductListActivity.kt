@@ -45,6 +45,12 @@ class ProductListActivity : AppCompatActivity(), OnClickProdutoItemListener {
 
     override fun onDeleteClicked(produto: Produto) {
         productViewModel.delete(produto)
+        productViewModel.isLoading.observe(this, Observer {
+            if(!it) {
+                productViewModel.getProducts()
+                productViewModel.isLoading.removeObservers(this)
+            }
+        })
     }
 
     override fun onEditClicked(produto: Produto) {

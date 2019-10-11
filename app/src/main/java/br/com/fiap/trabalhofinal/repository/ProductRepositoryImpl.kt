@@ -85,7 +85,7 @@ class ProductRepositoryImpl(private val service: ProdutoService) : ProductReposi
                         if (response.isSuccessful) {
                             onComplete("Registro excluído com sucesso")
                         } else {
-                            onError(Throwable("Não foi possivel inserir o produto"))
+                            onError(Throwable("Não foi possivel excluir o produto"))
                         }
                     }
 
