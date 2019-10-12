@@ -10,6 +10,7 @@ import br.com.fiap.trabalhofinal.R
 import br.com.fiap.trabalhofinal.adapter.ProductListAdapter
 import br.com.fiap.trabalhofinal.listener.OnClickProdutoItemListener
 import br.com.fiap.trabalhofinal.model.Produto
+import br.com.fiap.trabalhofinal.model.view.DeleteProductViewModel
 import br.com.fiap.trabalhofinal.model.view.ProductViewModel
 import br.com.fiap.trabalhofinal.ui.cadastro.CadastroActivity
 import kotlinx.android.synthetic.main.activity_product_list.*
@@ -20,6 +21,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class ProductListActivity : AppCompatActivity(), OnClickProdutoItemListener {
 
     val productViewModel: ProductViewModel by viewModel()
+
+    val deleteViewModel: DeleteProductViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +39,12 @@ class ProductListActivity : AppCompatActivity(), OnClickProdutoItemListener {
             }
         })
 
+        deleteViewModel.messageResponse.observe(this, Observer {
+            if (it != "") {
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            }
+        })
+
         btCadastrar.setOnClickListener {
             startActivity(
                 Intent(this, CadastroActivity::class.java)
@@ -44,8 +53,8 @@ class ProductListActivity : AppCompatActivity(), OnClickProdutoItemListener {
     }
 
     override fun onDeleteClicked(produto: Produto) {
-        productViewModel.delete(produto)
-        productViewModel.isLoading.observe(this, Observer {
+        deleteViewModel.delete(produto)
+        deleteViewModel.isLoading.observe(this, Observer {
             if(!it) {
                 productViewModel.getProducts()
                 productViewModel.isLoading.removeObservers(this)

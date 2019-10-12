@@ -1,5 +1,6 @@
 package br.com.fiap.trabalhofinal.di
 
+import br.com.fiap.trabalhofinal.model.view.DeleteProductViewModel
 import br.com.fiap.trabalhofinal.model.view.FormProductViewModel
 import br.com.fiap.trabalhofinal.model.view.ProductViewModel
 import br.com.fiap.trabalhofinal.repository.ProductRepository
@@ -44,4 +45,5 @@ val repositoryModule = module {
 val viewModelModule = module {
     viewModel { ProductViewModel(get(), get()) }
     viewModel { FormProductViewModel(get()) }
+    viewModel { DeleteProductViewModel(get()) }
 }
