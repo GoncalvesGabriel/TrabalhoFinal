@@ -26,4 +26,9 @@ interface ProductRepository {
         onComplete: (String?) -> Unit,
         onError: (Throwable?) -> Unit
     )
+
+    fun checkStatus(
+        onComplete: (Unit?) -> Unit,
+        onError: (Throwable?) -> Unit
+    )
 }

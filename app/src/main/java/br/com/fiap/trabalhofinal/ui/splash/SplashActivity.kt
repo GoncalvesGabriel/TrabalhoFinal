@@ -1,32 +1,34 @@
 package br.com.fiap.trabalhofinal.ui.splash
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.animation.AnimationUtils
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import br.com.fiap.trabalhofinal.R
-import br.com.fiap.trabalhofinal.main.MainActivity
+import br.com.fiap.trabalhofinal.model.view.CheckStatusViewModel
 import br.com.fiap.trabalhofinal.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_splash.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class SplashActivity : AppCompatActivity() {
 
-    private val TIME_WAIT_SPLASHSCREEN = 3500L
+    val checkStatusViewModel: CheckStatusViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        val preferences = getSharedPreferences("user_preferences", Context.MODE_PRIVATE)
-        val firstOpen = preferences.getBoolean("first_open", true)
-        if (firstOpen) {
-            animar()
-            markAsAlreadyOpen(preferences)
-        } else {
-            goToLogin()
-        }
+        animar()
+        checkStatusViewModel.messageResponse.observe(this, Observer {
+            if (it != "") {
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            }
+            if(checkStatusViewModel.success) {
+                goToLogin()
+            }
+        })
+        checkStatusViewModel.checkStatus()
     }
 
     private fun goToLogin() {
@@ -40,17 +42,6 @@ class SplashActivity : AppCompatActivity() {
         anim.reset()
         ivSplash.clearAnimation()
         ivSplash.startAnimation(anim)
-        Handler().postDelayed({
-            val nextActivity = Intent(this@SplashActivity, MainActivity::class.java)
-            startActivity(nextActivity)
-            finish()
-        }, TIME_WAIT_SPLASHSCREEN)
-    }
-
-    private fun markAsAlreadyOpen(preferences: SharedPreferences?) {
-        val editor = preferences!!.edit()
-        editor.putBoolean("first_open", false)
-        editor.apply()
     }
 
 }

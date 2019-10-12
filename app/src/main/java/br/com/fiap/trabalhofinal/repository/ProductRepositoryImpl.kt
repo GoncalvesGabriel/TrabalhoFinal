@@ -95,4 +95,21 @@ class ProductRepositoryImpl(private val service: ProdutoService) : ProductReposi
                 })
         }
     }
+
+    override fun checkStatus(onComplete: (Unit?) -> Unit, onError: (Throwable?) -> Unit) {
+        service.checkStatus()
+            .enqueue(object : Callback<Unit> {
+                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    if (response.isSuccessful) {
+                        onComplete(response.body())
+                    } else {
+                        onError(Throwable("Falha na comunicação com o servidor"))
+                    }
+                }
+
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    onError(t)
+                }
+            })
+    }
 }
