@@ -1,5 +1,6 @@
 package br.com.fiap.trabalhofinal.ui.list
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -19,6 +20,8 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class ProductListActivity : AppCompatActivity(), OnClickProdutoItemListener {
+
+    private val formRequestCode = 1
 
     val productViewModel: ProductViewModel by viewModel()
 
@@ -46,9 +49,14 @@ class ProductListActivity : AppCompatActivity(), OnClickProdutoItemListener {
         })
 
         btCadastrar.setOnClickListener {
-            startActivity(
-                Intent(this, CadastroActivity::class.java)
-            )
+            startActivityForResult(Intent(this, CadastroActivity::class.java), formRequestCode)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == formRequestCode && resultCode == Activity.RESULT_OK) {
+            productViewModel.getProducts()
         }
     }
 
@@ -57,7 +65,6 @@ class ProductListActivity : AppCompatActivity(), OnClickProdutoItemListener {
         deleteViewModel.isLoading.observe(this, Observer {
             if(!it) {
                 productViewModel.getProducts()
-                productViewModel.isLoading.removeObservers(this)
             }
         })
     }
@@ -65,6 +72,6 @@ class ProductListActivity : AppCompatActivity(), OnClickProdutoItemListener {
     override fun onEditClicked(produto: Produto) {
         val intent = Intent(this, CadastroActivity::class.java)
         intent.putExtra("PRODUTO", produto)
-        startActivity(intent)
+        startActivityForResult(intent, formRequestCode)
     }
 }

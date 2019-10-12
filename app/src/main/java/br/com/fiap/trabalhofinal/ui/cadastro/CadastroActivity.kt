@@ -1,5 +1,6 @@
 package br.com.fiap.trabalhofinal.ui.cadastro
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -8,7 +9,6 @@ import androidx.lifecycle.Observer
 import br.com.fiap.trabalhofinal.R
 import br.com.fiap.trabalhofinal.model.Produto
 import br.com.fiap.trabalhofinal.model.view.FormProductViewModel
-import br.com.fiap.trabalhofinal.ui.list.ProductListActivity
 import kotlinx.android.synthetic.main.activity_cadastro.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -48,8 +48,9 @@ class CadastroActivity : AppCompatActivity() {
 
             formProductViewModel.isLoading.observe(this, Observer {
                 if(!it) {
-                    val returnIntent = Intent(this, ProductListActivity::class.java)
-                    startActivity(returnIntent)
+                    val returnIntent = Intent()
+                    setResult(Activity.RESULT_OK, returnIntent)
+                    finish()
                 }
             })
         }
