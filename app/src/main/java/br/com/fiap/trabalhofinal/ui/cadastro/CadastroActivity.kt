@@ -1,12 +1,14 @@
 package br.com.fiap.trabalhofinal.ui.cadastro
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import br.com.fiap.trabalhofinal.R
+import br.com.fiap.trabalhofinal.helper.LocaleHelper
 import br.com.fiap.trabalhofinal.model.Produto
 import br.com.fiap.trabalhofinal.model.view.FormProductViewModel
 import kotlinx.android.synthetic.main.activity_cadastro.*
@@ -20,7 +22,7 @@ class CadastroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro)
-
+        setTitle(R.string.title_activity_cadastro)
         produto = Produto()
 
         if (this.intent.hasExtra("PRODUTO")) {
@@ -54,6 +56,10 @@ class CadastroActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleHelper.onAttach(base))
     }
 
 }

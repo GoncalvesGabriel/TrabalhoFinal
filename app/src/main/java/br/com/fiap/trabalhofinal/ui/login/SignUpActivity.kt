@@ -1,11 +1,13 @@
 package br.com.fiap.trabalhofinal.ui.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import br.com.fiap.trabalhofinal.R
+import br.com.fiap.trabalhofinal.helper.LocaleHelper
 import br.com.fiap.trabalhofinal.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -48,7 +50,10 @@ class SignUpActivity : AppCompatActivity() {
                     Toast.makeText(this, "Erro ao criar usuário: " + it.exception?.message, Toast.LENGTH_SHORT).show()
                 }
             }
+    }
 
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleHelper.onAttach(base))
     }
 
 

@@ -1,6 +1,7 @@
 package br.com.fiap.trabalhofinal.ui.list
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -9,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.fiap.trabalhofinal.R
 import br.com.fiap.trabalhofinal.adapter.ProductListAdapter
+import br.com.fiap.trabalhofinal.helper.LocaleHelper
 import br.com.fiap.trabalhofinal.listener.OnClickProdutoItemListener
 import br.com.fiap.trabalhofinal.model.Produto
 import br.com.fiap.trabalhofinal.model.view.DeleteProductViewModel
@@ -30,6 +32,7 @@ class ProductListActivity : AppCompatActivity(), OnClickProdutoItemListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_list)
+        setTitle(R.string.title_products_activity)
         productViewModel.getProducts()
         productViewModel.allProducts.observe(this, Observer {
             recyclerview.adapter = ProductListAdapter(it, this@ProductListActivity)
@@ -74,4 +77,9 @@ class ProductListActivity : AppCompatActivity(), OnClickProdutoItemListener {
         intent.putExtra("PRODUTO", produto)
         startActivityForResult(intent, formRequestCode)
     }
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleHelper.onAttach(base))
+    }
+
 }

@@ -57,7 +57,7 @@
         android:id="@+id/rm2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/rm2"
+        android:text="@string/rm_integrante2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"

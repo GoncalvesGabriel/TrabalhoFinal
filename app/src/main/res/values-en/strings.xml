@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Final work</string>
+    <string name="title_main_activity">Final work</string>
+    <string name="title_activity_cadastro">Register product</string>
+    <string name="title_products_activity">Products</string>
+    <string name="desc_tela_login">Logo login screen</string>
+    <string name="label_e_mail">E-mail</string>
+    <string name="label_senha">Password</string>
+    <string name="label_entrar">Login</string>
+    <string name="label_create_account">Create new account</string>
+    <string name="label_novo_usuario">Create new user</string>
+    <string name="label_nome">Name</string>
+    <string name="label_criar">Create</string>
+    <string name="error_required_field">Required field</string>
+    <string name="label_cod_produto">Product code</string>
+    <string name="label_quantidade_em_estoque">Amount in stock</string>
+    <string name="label_valor">Value</string>
+    <string name="label_cadastrar">Save</string>
+    <string name="integrante1">Gabriel Gonçaves da Silva</string>
+    <string name="rm_integrante1">333497</string>
+    <string name="integrante2">Tiago Naoto Kamegasawa</string>
+    <string name="rm_integrante2">333483</string>
+    <string name="version">Version</string>
+    <string name="products">Products</string>
+    <string name="about">About</string>
+    <string name="drawer_open">With menu</string>
+    <string name="drawer_close">Without menu</string>
+    <string name="menuTitle">Menu</string>
+    <string name="menuHeader">Menu</string>
+    <string name="logout">Logout</string>
+    <string name="exit">Exit</string>
+    <string name="avaliable_language">pt-rbr</string>
+    <string name="label_change_language">Portuguese interface</string>
+    <string name="connection_message">Connecting to server</string>
+    <string name="connection_sucess">Connection sucess</string>
+</resources>

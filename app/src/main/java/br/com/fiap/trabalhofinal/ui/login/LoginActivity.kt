@@ -13,6 +13,7 @@ import org.koin.android.ext.android.inject
 import android.view.inputmethod.InputMethodManager.HIDE_NOT_ALWAYS
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
+import br.com.fiap.trabalhofinal.helper.LocaleHelper
 import br.com.fiap.trabalhofinal.ui.list.ProductListActivity
 
 class LoginActivity : AppCompatActivity() {
@@ -24,6 +25,11 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        mAuth.currentUser?.isEmailVerified
+        mAuth.currentUser?.reload()
+        if (mAuth.currentUser != null) {
+            goToPrincipal()
+        }
         btLogin.setOnClickListener {
             hideKeyboard()
             if(validFields()) {
@@ -81,5 +87,10 @@ class LoginActivity : AppCompatActivity() {
             inputLoginEmail.setText(data?.getStringExtra("email"))
         }
     }
+
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleHelper.onAttach(base))
+    }
+
 
 }
