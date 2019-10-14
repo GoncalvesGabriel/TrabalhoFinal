@@ -20,6 +20,8 @@ class SplashActivity : AppCompatActivity() {
 
     private val TEMPO_AGUARDO_SPLASHSCREEN = 3000L
 
+    private val TEMPO_AGUARDO_HEROKU = 10000L
+
     val checkStatusViewModel: CheckStatusViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,8 +57,11 @@ class SplashActivity : AppCompatActivity() {
             }
             if (checkStatusViewModel.success) {
                 goToLogin()
-            } else if(checkStatusViewModel.fail){
-                startServerHeroku()
+            }
+            if (checkStatusViewModel.fail) {
+                Handler().postDelayed({
+                    goToLogin()
+                }, TEMPO_AGUARDO_HEROKU)
             }
         })
         checkStatusViewModel.checkStatus(this)
